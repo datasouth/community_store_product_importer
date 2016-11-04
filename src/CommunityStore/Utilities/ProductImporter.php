@@ -408,7 +408,7 @@ class ProductImporter
           $val = $product ? $product->getQty() : 0;
           break;
       case 'pQtyUnlim':
-          $val = $product ? $product->isUnlimited() : 1;
+          $val = $product ? $product->isUnlimited() : 0;
           break;
       case 'pNoQty':
           $val = $product ? $product->allowQuantity() : 0;
@@ -462,10 +462,14 @@ class ProductImporter
       if(!empty($ak)){
         $avValue = trim($csvvalue);
         if(!empty($avValue)){$avID = self::getAvIDbyValue($avValue,$ak->getAttributeKeyID());
+          $isNew = false;
           if($avID){
             $avValue = $avID;
+          }else{
+            $isNew = true;
           }
-          $ak->saveAttribute($product,false,$avValue);
+
+          $ak->saveAttribute($product,false,$avValue, $isNew);
         }
 
       }

@@ -189,7 +189,7 @@ class Import extends DashboardPageController
             "label" => "Stock Level"
           ),
           "pQtyUnlim" => array(
-            "default" => 1,
+            "default" => 0,
             "label" => "Is Unlimited"
           ),
           "pNoQty" => array(
