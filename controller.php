@@ -32,17 +32,22 @@ class Controller extends Package
             throw new ErrorException(t('This package requires that Community Store be installed'));
         } else {
             $pkg = parent::install();
-            $p = SinglePage::add('/dashboard/store/import', $pkg);
+            $p = SinglePage::add('/dashboard/store/product_importer', $pkg);
             if (is_object($p)) {
                 $p->update(array('cName' => t('Product Importer'), 'cDescription' => 'Product Importer Plugin'));
             }
+
+            $p = SinglePage::add('/dashboard/store/product_importer/export/', $pkg);
+            if (is_object($p)) {
+                $p->update(array('cName' => t('Export'), 'cDescription' => 'Export Products'));
+            }
+
+            $p = SinglePage::add('/dashboard/store/product_importer/import/', $pkg);
+            if (is_object($p)) {
+                $p->update(array('cName' => t('Import'), 'cDescription' => 'Import Products'));
+            }
         }
 
-    }
-
-
-    public function on_start() {
-        // Route::register('/checkout/paypalresponse','\Concrete\Package\CommunityStorePaypalStandard\Src\CommunityStore\Payment\Methods\CommunityStorePaypalStandard\CommunityStorePaypalStandardPaymentMethod::validateCompletion');
     }
 }
 ?>

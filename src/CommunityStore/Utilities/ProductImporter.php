@@ -185,7 +185,7 @@ class ProductImporter
                                   }
                                 }
 
-                                if(!empty($csvIndex) && $csvIndex!=null){
+                                if($csvIndex!=null){
                                   $newProduct[$tableColumnName] = $products[$csvIndex];
 
                                 } else {
@@ -193,7 +193,6 @@ class ProductImporter
                                 }
 
                               }
-
                               $producterrors = $this->validate($newProduct);
                               if (!$producterrors->has()) {
 
