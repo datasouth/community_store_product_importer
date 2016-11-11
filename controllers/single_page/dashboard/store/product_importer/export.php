@@ -40,7 +40,7 @@ class Export extends DashboardPageController {
 
     public function view($error=false) {
       $this->set('exportFields', $this->getExportFields());
-    
+
     }
 
     public function output_csv() {
@@ -179,10 +179,10 @@ class Export extends DashboardPageController {
 																				$assoc[] = $product->getSKU();
 																				break;
 																			case 'pActive':
-																				$assoc[] = $product->isActive();
+																				$assoc[] = $product->isActive() ? $product->isActive() : '0';
 																				break;
 																			case 'pFeatured':
-																				$assoc[] = $product->isFeatured();
+																				$assoc[] = $product->isFeatured() ? $product->isFeatured() : '0';
 																				break;
 																			case 'pPrice':
 																				$assoc[] = $product->getPrice();
@@ -191,7 +191,7 @@ class Export extends DashboardPageController {
 																				$assoc[] = $product->getSalePrice();
 																				break;
 																			case 'pTaxable':
-																				$assoc[] = $product->isTaxable();
+																				$assoc[] = $product->isTaxable() ? $product->isTaxable() : '0';
 																				break;
 																			case 'pTaxClass':
 																				$assoc[] = $product->getTaxClassID();
@@ -200,13 +200,13 @@ class Export extends DashboardPageController {
 																				$assoc[] = $product->getQty();
 																				break;
 																			case 'pQtyUnlim':
-																				$assoc[] = $product->isUnlimited();
+																				$assoc[] = $product->isUnlimited() ? $product->isUnlimited() : '0';
 																				break;
 																			case 'pNoQty':
-																				$assoc[] = $product->allowQuantity();
+																				$assoc[] = $product->allowQuantity() ? $product->allowQuantity() : '0';
 																				break;
 																			case 'pBackOrder':
-																				$assoc[] = $product->allowBackOrders();
+																				$assoc[] = $product->allowBackOrders() ? $product->allowBackOrders() : '0';
 																				break;
 																			case 'pDesc':
 																				$assoc[] = $this->filterNewLines($product->getDesc());
@@ -215,7 +215,7 @@ class Export extends DashboardPageController {
 																				$assoc[] = $this->filterNewLines($product->getDetail());
 																				break;
 																			case 'pShippable':
-																				$assoc[] = $product->isShippable();
+																				$assoc[] = $product->isShippable() ? $product->isShippable() : '0';
 																				break;
 																			case 'pWeight':
 																				$assoc[] = $product->getWeight();
@@ -233,10 +233,10 @@ class Export extends DashboardPageController {
 																				$assoc[] = $product->getDimensions('h');
 																				break;
 																			case 'pAutoCheckout':
-																				$assoc[] = $product->autoCheckout();
+																				$assoc[] = $product->autoCheckout() ? $product->autoCheckout() : '0';
 																				break;
 																			case 'pExclusive':
-																				$assoc[] = $product->isExclusive();
+																				$assoc[] = $product->isExclusive() ? $product->isExclusive() : '0';
 																				break;
 																			default:
 																				break;
@@ -247,7 +247,6 @@ class Export extends DashboardPageController {
 
 
 															}
-
 															$queue = Queue::get('export_products');
 															$queue->send(serialize($assoc));
 
