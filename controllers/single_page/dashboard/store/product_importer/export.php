@@ -104,9 +104,10 @@ class Export extends DashboardPageController {
               $queue->send(serialize($pID));
             }
 						$headers = array();
+						$base = $this->getExportFields();
 						foreach($exportFields as $area =>$fields){
 							foreach($fields as $field){
-								$headers[] = $field;
+								$headers[] = $base[$area][$field];
 							}
 						}
 						$queue = Queue::get('export_products');
